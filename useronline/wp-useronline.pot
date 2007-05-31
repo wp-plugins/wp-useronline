@@ -1,0 +1,237 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP-UserOnline 2.11\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2007-05-31 19:48+0800\n"
+"Last-Translator: Lester 'GaMerZ' Chan <gamerz84@hotmail.com>\n"
+"Language-Team: Lester Chan <gamerz84@hotmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Country: SINGAPORE\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: useronline-options.php:42
+msgid "Useronline Timeout"
+msgstr ""
+
+#: useronline-options.php:43
+msgid "Useronline Bots"
+msgstr ""
+
+#: useronline-options.php:44
+msgid "Useronline URL"
+msgstr ""
+
+#: useronline-options.php:49
+msgid "Updated"
+msgstr ""
+
+#: useronline-options.php:54
+msgid "No Useronline Option Updated"
+msgstr ""
+
+#: useronline-options.php:71
+#: useronline-options.php:74
+msgid "Useronline Options"
+msgstr ""
+
+#: useronline-options.php:77
+msgid "Time Out"
+msgstr ""
+
+#: useronline-options.php:79
+msgid "How long till it will remove the user from the database (In seconds)."
+msgstr ""
+
+#: useronline-options.php:83
+msgid "UserOnline URL"
+msgstr ""
+
+#: useronline-options.php:85
+msgid "URL To UserOnline Page (leave blank if you do not want to link it to the UserOnline Page)<br />Example: http://www.yoursite.com/blogs/useronline/<br />Example: http://www.yoursite.com/blogs/?page_id=2"
+msgstr ""
+
+#: useronline-options.php:89
+msgid "Bots Name/User Agent"
+msgstr ""
+
+#: useronline-options.php:91
+msgid "Here are a list of bots and their partial browser agents.<br />On the left column will be the <strong>Bot's Name</strong> and on the right column will be their <strong>Partial Browser Agent</strong>.<br />Start each entry on a new line."
+msgstr ""
+
+#: useronline-options.php:100
+msgid "Update Options"
+msgstr ""
+
+#: useronline-options.php:100
+msgid "Cancel"
+msgstr ""
+
+#: useronline-widget.php:62
+msgid "UserOnline"
+msgstr ""
+
+#: useronline-widget.php:69
+msgid "Widget Title"
+msgstr ""
+
+#: useronline-widget.php:70
+msgid "Display Users Browsing Site Under Users Online Count?"
+msgstr ""
+
+#: useronline-widget.php:73
+msgid "Yes"
+msgstr ""
+
+#: useronline-widget.php:75
+msgid "No"
+msgstr ""
+
+#: useronline.php:49
+msgid "WP-UserOnline"
+msgstr ""
+
+#: useronline.php:52
+msgid "Useronline"
+msgstr ""
+
+#: useronline.php:111
+msgid "guest"
+msgstr ""
+
+#: useronline.php:117
+#: useronline.php:293
+#: useronline.php:392
+#: useronline.php:553
+msgid "Guest"
+msgstr ""
+
+#: useronline.php:132
+msgid "Blog Archive"
+msgstr ""
+
+#: useronline.php:164
+#: useronline.php:538
+msgid "User"
+msgstr ""
+
+#: useronline.php:167
+#: useronline.php:324
+#: useronline.php:540
+msgid "Users"
+msgstr ""
+
+#: useronline.php:173
+#: useronline.php:175
+msgid "Online"
+msgstr ""
+
+#: useronline.php:205
+#: useronline.php:236
+#: useronline.php:590
+#: useronline.php:592
+#: useronline.php:610
+#: useronline.php:612
+#: useronline.php:625
+#, php-format
+msgid "%s @ %s"
+msgstr ""
+
+#: useronline.php:295
+#: useronline.php:394
+#: useronline.php:555
+msgid "Guests"
+msgstr ""
+
+#: useronline.php:299
+#: useronline.php:398
+#: useronline.php:560
+msgid "Bot"
+msgstr ""
+
+#: useronline.php:301
+#: useronline.php:400
+#: useronline.php:562
+msgid "Bots"
+msgstr ""
+
+#: useronline.php:327
+msgid "No User Is Browsing This Site"
+msgstr ""
+
+#: useronline.php:386
+#: useronline.php:545
+msgid "Member"
+msgstr ""
+
+#: useronline.php:388
+#: useronline.php:415
+#: useronline.php:547
+msgid "Members"
+msgstr ""
+
+#: useronline.php:404
+msgid "Users Browsing This Page"
+msgstr ""
+
+#: useronline.php:404
+#: useronline.php:576
+msgid "and"
+msgstr ""
+
+#: useronline.php:419
+msgid "No User Is Browsing This Page"
+msgstr ""
+
+#: useronline.php:572
+msgid "There is"
+msgstr ""
+
+#: useronline.php:574
+msgid "There are a total of"
+msgstr ""
+
+#: useronline.php:576
+msgid "online now"
+msgstr ""
+
+#: useronline.php:577
+msgid "Most users ever online were"
+msgstr ""
+
+#: useronline.php:577
+#: useronline.php:590
+#: useronline.php:592
+#: useronline.php:610
+#: useronline.php:612
+#: useronline.php:625
+msgid "on"
+msgstr ""
+
+#: useronline.php:580
+#: useronline.php:600
+#: useronline.php:620
+msgid "Online Now"
+msgstr ""
+
+#: useronline.php:587
+#: useronline.php:607
+msgid "referral"
+msgstr ""
+
+#: useronline.php:590
+#: useronline.php:592
+#: useronline.php:610
+#: useronline.php:612
+#: useronline.php:625
+msgid "url"
+msgstr ""
+
+#: useronline.php:632
+msgid "No One Is Online Now"
+msgstr ""
+
