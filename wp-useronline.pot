@@ -1,0 +1,332 @@
+# Translation of the WordPress plugin WP-UserOnline 2.60rc by Lester 'GaMerZ' Chan.
+# Copyright (C) 2010 Lester 'GaMerZ' Chan
+# This file is distributed under the same license as the WP-UserOnline package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: WP-UserOnline 2.60rc\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-useronline\n"
+"POT-Creation-Date: 2010-02-12 01:21+0000\n"
+"PO-Revision-Date: 2010-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: admin.php:8
+msgid "Users Online Now"
+msgstr ""
+
+#. #-#-#-#-#  plugin.pot (WP-UserOnline 2.60rc)  #-#-#-#-#
+#. Plugin Name of an extension
+#: admin.php:9 wp-stats.php:21 wp-stats.php:38
+msgid "WP-UserOnline"
+msgstr ""
+
+#: admin.php:22
+#, php-format
+msgid "There is <strong><a href=\"%s\">%s user</a></strong> online now."
+msgid_plural ""
+"There are a total of <strong><a href=\"%s\">%s users</a></strong> online now."
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin.php:47
+msgid "UserOnline Options"
+msgstr ""
+
+#: admin.php:48 wp-useronline.php:518 wp-useronline.php:575
+msgid "UserOnline"
+msgstr ""
+
+#: admin.php:58 wp-useronline.php:73
+msgid "Online"
+msgstr ""
+
+#: admin.php:64 wp-useronline.php:63
+msgid "1 User"
+msgstr ""
+
+#: admin.php:65 wp-useronline.php:64
+msgid "%USERONLINE_COUNT% Users"
+msgstr ""
+
+#: admin.php:66 wp-useronline.php:65
+msgid "1 Member"
+msgstr ""
+
+#: admin.php:67 wp-useronline.php:66
+msgid "%USERONLINE_COUNT% Members"
+msgstr ""
+
+#: admin.php:68 wp-useronline.php:67
+msgid "1 Guest"
+msgstr ""
+
+#: admin.php:69 wp-useronline.php:68
+msgid "%USERONLINE_COUNT% Guests"
+msgstr ""
+
+#: admin.php:70 wp-useronline.php:69
+msgid "1 Bot"
+msgstr ""
+
+#: admin.php:71 wp-useronline.php:70
+msgid "%USERONLINE_COUNT% Bots"
+msgstr ""
+
+#: admin.php:74 admin.php:75 admin.php:76 admin.php:80 admin.php:81
+#: admin.php:82 wp-useronline.php:76 wp-useronline.php:77 wp-useronline.php:78
+#: wp-useronline.php:83 wp-useronline.php:84 wp-useronline.php:85
+msgid ","
+msgstr ""
+
+#: admin.php:77 admin.php:83 wp-useronline.php:79 wp-useronline.php:86
+msgid "Users|Template Element"
+msgstr ""
+
+#: admin.php:83 wp-useronline.php:86
+msgid "Browsing This Page."
+msgstr ""
+
+#: admin.php:127
+msgid "Settings updated."
+msgstr ""
+
+#: admin.php:140
+msgid "Time Out"
+msgstr ""
+
+#: admin.php:142
+msgid "How long till it will remove the user from the database (In seconds)."
+msgstr ""
+
+#: admin.php:146
+msgid "UserOnline URL"
+msgstr ""
+
+#: admin.php:148
+msgid ""
+"URL To UserOnline Page (leave blank if you do not want to link it to the "
+"UserOnline Page)<br />Example: http://www.yoursite.com/blogs/useronline/<br /"
+">Example: http://www.yoursite.com/blogs/?page_id=2"
+msgstr ""
+
+#: admin.php:152
+msgid "Bots Name/User Agent"
+msgstr ""
+
+#: admin.php:154
+msgid ""
+"Here are a list of bots and their partial browser agents.<br />On the left "
+"column will be the <strong>Bot's Name</strong> and on the right column will "
+"be their <strong>Partial Browser Agent</strong>.<br />Start each entry on a "
+"new line."
+msgstr ""
+
+#: admin.php:162
+msgid "Naming Conventions:"
+msgstr ""
+
+#: admin.php:163 admin.php:197 admin.php:222
+msgid "Allowed Variables:"
+msgstr ""
+
+#: admin.php:165 admin.php:202 admin.php:230
+msgid "Restore Default Template"
+msgstr ""
+
+#: admin.php:171
+msgid "Singular Form"
+msgstr ""
+
+#: admin.php:172
+msgid "Plural Form"
+msgstr ""
+
+#: admin.php:192
+msgid "Useronline Templates"
+msgstr ""
+
+#: admin.php:196
+msgid "User(s) Online:"
+msgstr ""
+
+#: admin.php:206
+msgid "User(s) Browsing Site:"
+msgstr ""
+
+#: admin.php:207
+msgid "User(s) Browsing Page:"
+msgstr ""
+
+#: admin.php:210 scb/AdminPage.php:119 scb/AdminPage.php:130
+msgid "Save Changes"
+msgstr ""
+
+#: admin.php:236
+msgid "Member Names Separator"
+msgstr ""
+
+#: admin.php:237
+msgid "Guests Separator"
+msgstr ""
+
+#: admin.php:238
+msgid "Bots Separator"
+msgstr ""
+
+#: scb/AdminPage.php:108
+msgid "Settings <strong>saved</strong>."
+msgstr ""
+
+#: scb/AdminPage.php:284
+msgid "Settings"
+msgstr ""
+
+#: wp-stats.php:31
+#, php-format
+msgid "<strong>%s</strong> user online now."
+msgid_plural "<strong>%s</strong> users online now."
+msgstr[0] ""
+msgstr[1] ""
+
+#: wp-useronline.php:151
+msgid "guest"
+msgstr ""
+
+#: wp-useronline.php:157 wp-useronline.php:349
+msgid "Guest"
+msgstr ""
+
+#: wp-useronline.php:166
+msgid "Admin"
+msgstr ""
+
+#: wp-useronline.php:172
+msgid "Archive"
+msgstr ""
+
+#: wp-useronline.php:347
+msgid "User"
+msgstr ""
+
+#: wp-useronline.php:347
+msgid "Users"
+msgstr ""
+
+#: wp-useronline.php:348
+msgid "Member"
+msgstr ""
+
+#: wp-useronline.php:348
+msgid "Members"
+msgstr ""
+
+#: wp-useronline.php:349
+msgid "Guests"
+msgstr ""
+
+#: wp-useronline.php:350
+msgid "Bot"
+msgstr ""
+
+#: wp-useronline.php:350
+msgid "Bots"
+msgstr ""
+
+#: wp-useronline.php:358
+#, php-format
+msgid ""
+"There is <strong>%s</strong> online now: <strong>%s</strong>, <strong>%s</"
+"strong> and <strong>%s</strong>."
+msgid_plural ""
+"There are a total of <strong>%s</strong> online now: <strong>%s</strong>, "
+"<strong>%s</strong> and <strong>%s</strong>."
+msgstr[0] ""
+msgstr[1] ""
+
+#: wp-useronline.php:434
+msgid "No One Is Online Now"
+msgstr ""
+
+#: wp-useronline.php:436
+msgid "on"
+msgstr ""
+
+#: wp-useronline.php:437
+msgid "url"
+msgstr ""
+
+#: wp-useronline.php:438
+msgid "referral"
+msgstr ""
+
+#: wp-useronline.php:449
+msgid "Online Now"
+msgstr ""
+
+#: wp-useronline.php:480
+#, php-format
+msgid "%s @ %s"
+msgstr ""
+
+#: wp-useronline.php:499
+#, php-format
+msgid "Most users ever online were <strong>%s</strong>, on <strong>%s</strong>"
+msgstr ""
+
+#: wp-useronline.php:517
+msgid "WP-UserOnline users online statistics"
+msgstr ""
+
+#: wp-useronline.php:582
+msgid "Title:"
+msgstr ""
+
+#: wp-useronline.php:585
+msgid "Statistics Type:"
+msgstr ""
+
+#: wp-useronline.php:587
+msgid "Users Online Count"
+msgstr ""
+
+#: wp-useronline.php:588
+msgid "Users Browsing Current Page"
+msgstr ""
+
+#: wp-useronline.php:589
+msgid "Users Browsing Site"
+msgstr ""
+
+#: wp-useronline.php:591
+msgid "Users Online Count & Users Browsing Current Page"
+msgstr ""
+
+#: wp-useronline.php:592
+msgid "Users Online Count & Users Browsing Site"
+msgstr ""
+
+#. Plugin URI of an extension
+msgid "http://lesterchan.net/portfolio/programming/php/"
+msgstr ""
+
+#. Description of an extension
+msgid ""
+"Enable you to display how many users are online on your Wordpress blog with "
+"detailed statistics of where they are and who there are(Members/Guests/"
+"Search Bots)."
+msgstr ""
+
+#. Author of an extension
+msgid "Lester 'GaMerZ' Chan"
+msgstr ""
+
+#. Author URI of an extension
+msgid "http://lesterchan.net"
+msgstr ""
