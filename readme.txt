@@ -10,7 +10,7 @@ Enable you to display how many users are online on your Wordpress blog with deta
 
 == Description ==
 
-**PHP5 is required since version 2.60.**
+**PHP 5 is required since version 2.60.**
 
 This plugin enables you to display how many users are online on your Wordpress blog with detailed statistics of where they are and who they are (Members/Guests/Search Bots).
 
