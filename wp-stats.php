@@ -1,17 +1,10 @@
 <?php
 
 class UserOnline_WpStats {
+
 	function init() {
 		add_filter('wp_stats_page_admin_plugins', array(__CLASS__, 'page_admin_general_stats'));
 		add_filter('wp_stats_page_plugins', array(__CLASS__, 'page_general_stats'));
-
-		add_filter('useronline_display_name', array(__CLASS__, 'stats_page_link'));
-	}
-
-	function stats_page_link($author) {
-		$stats_url = add_query_arg('stats_author', urlencode($author), get_option('stats_url'));
-
-		return html_link($stats_url, $author);
 	}
 
 	// Add WP-UserOnline General Stats To WP-Stats Page Options
@@ -35,9 +28,9 @@ class UserOnline_WpStats {
 
 		if ( $stats_display['useronline'] == 1 )
 			$content .= 
-			html('p', html('strong', __('WP-UserOnline', 'wp-useronline')))
+			 html('p', html('strong', __('WP-UserOnline', 'wp-useronline')))
 			.html('ul',
-				html('li', sprintf($str, number_format_i18n(get_users_online_count())))
+				 html('li', sprintf($str, number_format_i18n(get_users_online_count())))
 				.html('li', UserOnline_Template::format_most_users())
 			);
 

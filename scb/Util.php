@@ -1,6 +1,7 @@
 <?php
 
 class scbUtil {
+
 	// Force script enqueue
 	static function do_scripts($handles) {
 		global $wp_scripts;
@@ -31,6 +32,25 @@ class scbUtil {
 		echo "</script>";
 	}
 
+
+	// Have more than one uninstall hooks; also prevents an UPDATE query on each page load
+	static function add_uninstall_hook($plugin, $callback) {
+		register_uninstall_hook($plugin, '__return_false');	// dummy
+
+		add_action('uninstall_' . plugin_basename($plugin), $callback);
+	}
+
+	// Apply a function to each element of a (nested) array recursively
+	static function array_map_recursive($callback, $array) {
+		array_walk_recursive($array, array(__CLASS__, 'array_map_recursive_helper'), $callback);
+
+		return $array;
+	}
+
+	static function array_map_recursive_helper(&$val, $key, $callback) {
+		$val = $callback($val);
+	}
+
 	// Extract certain $keys from $array
 	static function array_extract($array, $keys) {
 		$r = array();
@@ -50,7 +70,7 @@ class scbUtil {
 			if ( is_object($value) )
 				$value = get_object_vars($value);
 			if ( array_key_exists($key, $value) )
-				$r[] = $v[$key];
+				$r[] = $value[$key];
 		}
 
 		return $r;
@@ -74,74 +94,23 @@ class scbUtil {
 		return implode(',', $values);
 	}
 
-	// Have more than one uninstall hooks; also prevents an UPDATE query on each page load
-	static function add_uninstall_hook($plugin, $callback) {
-		register_uninstall_hook($plugin, '__return_false');	// dummy
+	// Example: split_at('</', '<a></a>') => array('<a>', '</a>')
+	static function split_at($delim, $str) {
+		$i = strpos($str, $delim);
 
-		add_action('uninstall_' . plugin_basename($plugin), $callback);
+		if ( false === $i )
+			return false;
+
+		$start = substr($str, 0, $i);
+		$finish = substr($str, $i);
+
+		return array($start, $finish);
 	}
 }
 
-// _____Simple debug utility_____
 
-if ( ! class_exists('scbDebug') ):
-class scbDebug {
-	private $args;
+//_____Minimalist HTML framework_____
 
-	function __construct($args) {
-		$this->args = $args;
-
-		register_shutdown_function(array($this, '_delayed'));
-	}
-
-	function _delayed() {
-		if ( !current_user_can('administrator') )
-			return;
-
-		$this->raw($this->args);
-	}
-
-	static function raw($args) {
-		echo "<pre>";
-		foreach ( $args as $arg )
-			if ( is_array($arg) || is_object($arg) )
-				print_r($arg);
-			else
-				var_dump($arg);
-		echo "</pre>";	
-	}
-}
-endif;
-
-if ( ! function_exists('debug') ):
-function debug() {
-	$args = func_get_args();
-
-	// integrate with FirePHP
-	if ( class_exists('FirePHP') ) {
-		$firephp = FirePHP::getInstance(true);
-		$firephp->group('debug');
-		foreach ( $args as $arg )
-			$firephp->log($arg);
-		$firephp->groupEnd();
-
-		return;
-	}
-
-	new scbDebug($args);
-}
-endif;
-
-if ( ! function_exists('debug_raw') ):
-function debug_raw() {
-	$args = func_get_args();
-
-	scbDebug::raw($args);
-}
-endif;
-
-
-// _____Minimalist HTML framework_____
 
 if ( ! function_exists('html') ):
 function html($tag, $content = '') {
@@ -157,12 +126,13 @@ function html_link($url, $title = '') {
 	if ( empty($title) )
 		$title = $url;
 
-	return sprintf("<a href='%s'>%s</a>", $url, $title);
+	return sprintf("<a href='%s'>%s</a>", esc_url($url), $title);
 }
 endif;
 
 
-// _____Compatibility layer_____
+//_____Compatibility layer_____
+
 
 // WP < 3.0
 if ( ! function_exists('__return_false') ) :
