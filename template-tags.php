@@ -6,12 +6,12 @@ function users_online() {
 }
 
 function get_users_online() {
-	$template = get_option('useronline_template_useronline');
-	$template = str_ireplace('%USERONLINE_PAGE_URL%', get_option('useronline_url'), $template);
-	$template = str_ireplace('%USERONLINE_MOSTONLINE_COUNT%', get_most_users_online(), $template);
-	$template = str_ireplace('%USERONLINE_MOSTONLINE_DATE%', get_most_users_online_date(), $template);
+	$template = UserOnline_Core::$options->templates['useronline'];
+	$template = str_ireplace('%PAGE_URL%', UserOnline_Core::$options->page_url, $template);
+	$template = str_ireplace('%MOSTONLINE_COUNT%', get_most_users_online(), $template);
+	$template = str_ireplace('%MOSTONLINE_DATE%', get_most_users_online_date(), $template);
 
-	return UserOnline_Template::format_count($template, get_users_online_count());
+	return UserOnline_Template::format_count(get_users_online_count(), 'user', $template);
 }
 
 ### Function: Display UserOnline Count
@@ -20,12 +20,7 @@ function users_online_count() {
 }
 
 function get_users_online_count() {
-	global $wpdb, $useronline;
-
-	if ( ! isset($useronline) )
-		$useronline = intval($wpdb->get_var("SELECT COUNT(*) FROM $wpdb->useronline"));
-
-	return $useronline;
+	return UserOnline_Core::get_user_online_count();
 }
 
 ### Function: Display Max UserOnline
@@ -34,7 +29,7 @@ function most_users_online() {
 }
 
 function get_most_users_online() {
-	return intval(get_option('useronline_most_users'));
+	return intval(UserOnline_Core::$most->count);
 }
 
 ### Function: Display Max UserOnline Date
@@ -43,7 +38,7 @@ function most_users_online_date() {
 }
 
 function get_most_users_online_date() {
-	return UserOnline_Template::format_date(get_option('useronline_most_timestamp'));
+	return UserOnline_Template::format_date(UserOnline_Core::$most->date);
 }
 
 ### Function: Display Users Browsing The Site
@@ -52,11 +47,7 @@ function users_browsing_site() {
 }
 
 function get_users_browsing_site() {
-	global $wpdb;
-
-	$users_online = $wpdb->get_results("SELECT displayname, type FROM $wpdb->useronline ORDER BY type");
-
-	return UserOnline_Template::compact_list('site', $users_online);
+	return UserOnline_Template::compact_list('site');
 }
 
 ### Function: Display Users Browsing The (Current) Page
@@ -65,38 +56,24 @@ function users_browsing_page($page_url = '') {
 }
 
 function get_users_browsing_page($page_url = '') {
-	global $wpdb;
-
-	if ( empty($page_url) )
-		$page_url = $_SERVER['REQUEST_URI'];
-
-	$users_online = $wpdb->get_results($wpdb->prepare("SELECT displayname, type FROM $wpdb->useronline WHERE url = %s ORDER BY type", $page_url));
-
-	return UserOnline_Template::compact_list('page', $users_online);
+	return UserOnline_Template::compact_list('page');
 }
 
 ### Function: UserOnline Page
 function users_online_page() {
 	global $wpdb;
 
-	$usersonline = $wpdb->get_results("SELECT * FROM $wpdb->useronline ORDER BY type");
+	$usersonline = $wpdb->get_results("SELECT * FROM $wpdb->useronline");
 
 	$user_buckets = array();
 	foreach ( $usersonline as $useronline )
-		$user_buckets[$useronline->type][] = (array) $useronline;
+		$user_buckets[$useronline->user_type][] = $useronline;
 
 	$counts = UserOnline_Template::get_counts($user_buckets);
 
-	$texts = array(
-		'user' => array(__('User', 'wp-useronline'), __('Users', 'wp-useronline')),
-		'member' => array(__('Member', 'wp-useronline'), __('Members', 'wp-useronline')),
-		'guest' => array(__('Guest', 'wp-useronline'), __('Guests', 'wp-useronline')),
-		'bot' => array(__('Bot', 'wp-useronline'), __('Bots', 'wp-useronline')),
-	);
-	foreach ( $texts as $type => $strings ) {
-		$i = ($counts[$type] == 1) ? 0 : 1;
-		$nicetexts[$type] = number_format_i18n($counts[$type]).' '.$strings[$i];
-	}
+	$nicetexts = array();
+	foreach ( array('user', 'member', 'guest', 'bot') as $user_type )
+		$nicetexts[$user_type] = UserOnline_Template::format_count($counts[$user_type], $user_type);
 
 	$text = _n(
 		'There is <strong>%s</strong> online now: <strong>%s</strong>, <strong>%s</strong> and <strong>%s</strong>.',
@@ -105,7 +82,7 @@ function users_online_page() {
 	);
 
 	$output = 
-	html('p', sprintf($text, $nicetexts['user'], $nicetexts['member'], $nicetexts['guest'], $nicetexts['bot']))
+	 html('p', vsprintf($text, $nicetexts))
 	.html('p', UserOnline_Template::format_most_users())
 	.UserOnline_Template::detailed_list($counts, $user_buckets, $nicetexts);
 
@@ -113,9 +90,175 @@ function users_online_page() {
 }
 
 ### Function Check If User Is Online
-function is_online($user_login) {
+function is_user_online($user_id) {
 	global $wpdb;
 
-	return (bool) $wpdb->get_var($wpdb-prepare("SELECT COUNT(*) FROM $wpdb->useronline WHERE username = %s LIMIT 1", $user_login));
+	return (bool) $wpdb->get_var($wpdb-prepare("SELECT COUNT(*) FROM $wpdb->useronline WHERE user_id = %d LIMIT 1", $user_id));
+}
+
+function get_useronline_($output, $type = 'site') {
+	return UserOnline_Template::compact_list($type, $output);
+}
+
+class UserOnline_Template {
+
+	private static $cache = array();
+
+	function compact_list($type, $output = 'html') {
+
+		if ( !isset(self::$cache[$type]) ) {
+			global $wpdb;
+
+			if ( 'site' == $type )
+				$where = '';
+			elseif ( 'page' == $type )
+				$where = $wpdb->prepare('WHERE page_url = %s', $_SERVER['REQUEST_URI']);
+			else
+				$where = $wpdb->prepare('WHERE page_url = %s', $type);
+
+			self::$cache[$type] = $wpdb->get_results("SELECT * FROM $wpdb->useronline $where");
+		}
+		$users = self::$cache[$type];
+
+		if ( 'list' == $output )
+			return $users;
+
+		$buckets = array();
+		foreach ( $users as $user )
+			$buckets[$user->user_type][] = $user;
+
+		if ( 'buckets' == $output )
+			return $buckets;
+
+		$counts = self::get_counts($buckets);
+
+		if ( 'counts' == $output )
+			return $counts;
+
+		// Template - Naming Conventions
+		$naming = UserOnline_Core::$options->naming;
+
+		// Template - User(s) Browsing Site
+		$template = UserOnline_Core::$options->templates["browsing$type"];
+
+		// Nice Text For Users
+		$output = self::format_count($counts['user'], 'user', $template['text']);
+
+		// Print Member Name
+		$temp_member = '';
+		$members = $buckets['member'];
+		if ( $members ) {
+			$temp_member = array();
+			foreach ( $members as $member )
+				$temp_member[] = self::format_name($member);
+			$temp_member = implode($template['separators']['members'], $temp_member);
+		}
+		$output = str_ireplace('%MEMBER_NAMES%', $temp_member, $output);
+
+		// Counts
+		foreach ( array('member', 'guest', 'bot') as $user_type ) {
+			if ( $counts[$user_type] > 1 )
+				$number = str_ireplace('%COUNT%', number_format_i18n($counts[$user_type]), $naming[$user_type . 's']);
+			elseif ( $counts[$user_type] == 1 )
+				$number = $naming[$user_type];
+			else
+				$number = '';
+			$output = str_ireplace("%{$user_type}S%", $number, $output);
+		}
+
+		// Seperators
+		$separator = ( $counts['member'] && $counts['guest'] ) ? $template['separators']['guests'] : '';
+		$output = str_ireplace('%GUESTS_SEPERATOR%', $separator, $output);
+
+		$separator = ( ( $counts['guest'] || $counts['member'] ) && $counts['bot'] ) ? $template['separators']['bots'] : '';
+		$output = str_ireplace('%BOTS_SEPERATOR%', $separator, $output);
+
+		return $output;
+	}
+
+	function detailed_list($counts, $user_buckets, $nicetexts) {
+		if ( $counts['user'] == 0 )
+			return html('h2', __('No one is online now.', 'wp-useronline'));
+
+		$_on = __('on', 'wp-useronline');
+		$_url = __('url', 'wp-useronline');
+		$_referral = __('referral', 'wp-useronline');
+
+		$output = '';
+		foreach ( array('member', 'guest', 'bot') as $user_type ) {
+			if ( !$counts[$user_type] )
+				continue;
+
+			$count = $counts[$user_type];
+			$users = $user_buckets[$user_type];
+			$nicetext = $nicetexts[$user_type];
+
+			$output .= html('h2', $nicetext . ' ' . __('Online Now', 'wp-useronline'));
+
+			$i=1;
+			foreach ( $users as $user ) {
+				$nr = number_format_i18n($i++);
+				$name = self::format_name($user);
+				$user_ip = self::format_ip($user->user_ip);
+				$date = self::format_date($user->timestamp);
+				$page_title = esc_html($user->page_title);
+				$current_link = '[' . html_link(esc_url($user->page_url), $_url) . ']';
+
+				$referral_link = '';
+				if ( !empty($user->referral) )
+					$referral_link = '[' . html_link(esc_attr(esc_url($user->referral)), $_referral) . ']';
+
+				$output .= "<p><strong>#$nr - $name</strong> $user_ip $_on $date<br/>$page_title $current_link $referral_link</p>\n";
+			}
+		}
+
+		return $output;
+	}
+
+
+	function format_ip($ip) {
+		if ( ! current_user_can('administrator') || empty($ip) || $ip == 'unknown' )
+			return;
+
+		return '<span dir="ltr">(<a href="http://whois.domaintools.com/' . $ip . '" title="' . gethostbyaddr($ip) . '">' . $ip . '</a>)</span>';
+	}
+
+	function format_date($date) {
+		return mysql2date(sprintf(__('%s @ %s', 'wp-useronline'), get_option('date_format'), get_option('time_format')), $date, true);
+	}
+
+	function format_name($user) {
+		return apply_filters('useronline_display_user', esc_html($user->user_name), $user);
+	}
+
+	function format_count($count, $user_type, $template = '') {
+		$i = ($count == 1) ? '' : 's';
+		$string = UserOnline_Core::$options->naming[$user_type . $i];
+
+		$output = str_ireplace('%COUNT%', number_format_i18n($count), $string);
+
+		if ( empty($template) )
+			return $output;
+
+		return str_ireplace('%USERS%', $output, $template);
+	}
+
+	function format_most_users() {
+		return sprintf(__('Most users ever online were <strong>%s</strong>, on <strong>%s</strong>', 'wp-useronline'),
+			number_format_i18n(get_most_users_online()),
+			get_most_users_online_date()
+		);
+	}
+
+	function get_counts($buckets) {
+		$counts = array();
+		$total = 0;
+		foreach ( array('member', 'guest', 'bot') as $user_type )
+			$total += $counts[$user_type] = count(@$buckets[$user_type]);
+
+		$counts['user'] = $total;
+
+		return $counts;
+	}
 }
 

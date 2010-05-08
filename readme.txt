@@ -2,9 +2,9 @@
 Contributors: GamerZ, scribu
 Donate link: http://lesterchan.net/wordpress
 Tags: useronline, usersonline, wp-useronline, online, users, user, ajax, widget
-Requires at least: 2.8
-Tested up to: 2.9.2
-Stable tag: 2.62
+Requires at least: 2.9
+Tested up to: 3.0
+Stable tag: 2.71
 
 Enable you to display how many users are online on your Wordpress blog with detailed statistics.
 
@@ -12,15 +12,9 @@ Enable you to display how many users are online on your Wordpress blog with deta
 
 **PHP 5 is required since version 2.60.**
 
-This plugin enables you to display how many users are online on your Wordpress blog with detailed statistics of where they are and who they are (Members/Guests/Search Bots).
+This plugin enables you to display how many users are online on your Wordpress site, with detailed statistics of where they are and who they are (Members/Guests/Search Bots).
 
-[Demo](http://lesterchan.net/wordpress/useronline/) | [Translations](http://dev.wp-plugins.org/browser/wp-useronline/i18n/)
-
-= Credits =
-
-* __ngetext() by [Anna Ozeritskaya](http://hweia.ru/)
-* Right-To-Left language support by [Kambiz R. Khojasteh](http://persian-programming.com/)
-* Maintained by [scribu](http://scribu.net)
+[Translations](http://scribu.net/wordpress/translating-plugins.html)
 
 == Installation ==
 
@@ -31,26 +25,22 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 = Usage =
 
-**General Usage (Without Widget)**
-
-Open `wp-content/themes/<YOUR THEME NAME>/sidebar.php` and add Anywhere:
-
-`
-<?php if (function_exists('get_useronline')): ?>
-   <li>
-      <h2>UserOnline</h2>
-      <ul>
-         <li><div id="useronline-count"><?php get_useronline(); ?></div></li>
-      </ul>
-   </li>
-<?php endif; ?>
-`
-
 **General Usage (With Widget)**
 
 1. Go to `WP-Admin -> Appearance -> Widgets`
 1. The widget name is <strong>UserOnline</strong>.
 1. Scroll down for instructions on how to create a *UserOnline Page*.
+
+
+**General Usage (Without Widget)**
+
+Open `wp-content/themes/<YOUR THEME NAME>/sidebar.php` and add Anywhere:
+
+`
+<?php if (function_exists('users_online')): ?>
+	<p>Users online: <div id="useronline-count"><?php users_online(); ?></div></p>
+<?php endif; ?>
+`
 
 **UserOnline Page**
 
@@ -68,8 +58,8 @@ If you **ARE NOT** using nice permalinks, you need to go to `WP-Admin -> Setting
 To Display *Most Number Of Users Online* use:
 
 `
-<?php if (function_exists('get_most_useronline')): ?>
-   <p>Most Users Ever Online Is <?php echo get_most_useronline(); ?> On <?php echo get_most_useronline_date(); ?></p>
+<?php if (function_exists('get_most_users_online')): ?>
+   <p>Most Users Ever Online Is <?php echo get_most_users_online(); ?> On <?php echo get_most_users_online_date(); ?></p>
 <?php endif; ?>
 `
 
@@ -91,21 +81,29 @@ To Display *Users Browsing A Page* use:
 
 == Screenshots ==
 
-[WP-UserOnline Screenshots](http://lesterchan.net/wordpress/screenshots/browse/wp-useronline/ "WP-UserOnline Screenshots")
+1. Right Now text
+2. Admin page
+3. Settings page
 
 == Frequently Asked Questions ==
 
-= Error on activation: "Parse error: syntax error, unexpected T_CLASS..." =
+= Error on activation: "Parse error: syntax error, unexpected..." =
 
-Make sure your host is running PHP 5. Add this line to wp-config.php to check:
+Make sure your host is running PHP 5. The only foolproof way to do this is to add this line to wp-config.php:
 
 `var_dump(PHP_VERSION);`
+<br>
 
 == Changelog ==
 
+= 2.71 =
+* fix %USERONLINE_COUNT% problem
+
 = 2.70 =
-* revamp template tags
+* added option to link user names to their author page
 * allow displaying online users from a different page than the current page
+* bundle language files
+* [more info](http://scribu.net/wordpress/wp-useronline/wu-2-70.html)
 
 = 2.62 (2010-03-07) =
 * fix integration with WP-Stats
