@@ -316,7 +316,7 @@ function _useronline_init() {
 	require_once dirname(__FILE__) . '/template-tags.php';
 	require_once dirname(__FILE__) . '/deprecated.php';
 
-	load_plugin_textdomain('wp-useronline', '', basename(dirname(__FILE__)));
+	load_plugin_textdomain('wp-useronline', '', dirname(plugin_basename(__FILE__)) . '/lang');
 
 	UserOnline_Core::init();
 
