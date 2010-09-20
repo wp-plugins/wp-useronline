@@ -2,9 +2,9 @@
 Contributors: GamerZ, scribu
 Donate link: http://lesterchan.net/wordpress
 Tags: useronline, usersonline, wp-useronline, online, users, user, ajax, widget
-Requires at least: 2.9
+Requires at least: 3.0
 Tested up to: 3.0
-Stable tag: 2.73
+Stable tag: 2.80
 
 Enable you to display how many users are online on your Wordpress blog with detailed statistics.
 
@@ -14,7 +14,7 @@ Enable you to display how many users are online on your Wordpress blog with deta
 
 This plugin enables you to display how many users are online on your Wordpress site, with detailed statistics of where they are and who they are (Members/Guests/Search Bots).
 
-[Translations](http://scribu.net/wordpress/translating-plugins.html)
+Links: [Plugin News](http://scribu.net/wordpress/wp-useronline) | [Translating](http://scribu.net/wordpress/translating-plugins.html)
 
 == Installation ==
 
@@ -89,12 +89,17 @@ To Display *Users Browsing A Page* use:
 
 = Error on activation: "Parse error: syntax error, unexpected..." =
 
-Make sure your host is running PHP 5. The only foolproof way to do this is to add this line to wp-config.php:
+Make sure your host is running PHP 5. The only foolproof way to do this is to add this line to wp-config.php (after the opening `<?php` tag):
 
 `var_dump(PHP_VERSION);`
 <br>
 
 == Changelog ==
+
+= 2.80 =
+* don't show url and referral links for users in the admin area
+* smarter detection via ajax requests
+* fix SQL errors
 
 = 2.72 =
 * fix fatal error on upgrade
