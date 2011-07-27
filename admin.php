@@ -11,6 +11,7 @@ class UserOnline_Admin_Integration extends scbAdminPage {
 			'page_slug' => 'useronline',
 			'parent' => 'index.php',
 			'action_link' => false,
+			'capability' => 'list_users',
 		);
 
 		add_action( 'rightnow_end', array( $this, 'rightnow' ) );
@@ -113,7 +114,7 @@ class UserOnline_Options extends scbAdminPage {
 				'title' => __( 'Time Out', 'wp-useronline' ),
 				'type' => 'text',
 				'name_tree' => 'timeout',
-				'desc' => '<br />' . __( 'How long until it will remove the user from the database ( In seconds ).', 'wp-useronline' ),
+				'desc' => '<br />' . __( 'How long until it will remove the user from the database (in seconds).', 'wp-useronline' ),
 				'extra' => 'size="4"'
 			),
 
