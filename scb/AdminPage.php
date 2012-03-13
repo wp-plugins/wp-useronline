@@ -108,6 +108,13 @@ abstract class scbAdminPage {
 	// This is where all the page args can be set
 	function setup(){}
 
+	/**
+	 * Called when the page is loaded, but before any rendering.
+	 *
+	 * Useful for calling $screen->add_help_tab() etc.
+	 */
+	function page_loaded() {}
+
 	// This is where the css and js go
 	// Both wp_enqueue_*() and inline code can be added
 	function page_head(){}
@@ -189,18 +196,19 @@ abstract class scbAdminPage {
 				$value = __( 'Save Changes', $this->textdomain );
 		}
 
-		$input_args = array( 'type' => 'submit',
-			'names' => $action,
-			'values' => $value,
+		$input_args = array(
+			'type' => 'submit',
+			'name' => $action,
+			'value' => $value,
 			'extra' => '',
-			'desc' => false );
+			'desc' => false,
+			'wrap' => html( 'p class="submit"', scbForms::TOKEN )
+		);
 
 		if ( ! empty( $class ) )
-			$input_args['extra'] = "class='{$class}'";
+			$input_args['extra'] = compact( 'class' );
 
-		$output = "<p class='submit'>\n" . scbForms::input( $input_args ) . "</p>\n";
-
-		return $output;
+		return scbForms::input( $input_args );
 	}
 
 	/*
@@ -320,6 +328,8 @@ abstract class scbAdminPage {
 
 		if ( ! $this->pagehook )
 			return;
+
+		add_action( 'load-' . $this->pagehook, array( $this, 'page_loaded' ) );
 
 		if ( $ajax_submit ) {
 			$this->ajax_response();
