@@ -1,19 +1,17 @@
 === WP-UserOnline ===
-Contributors: GamerZ, scribu
-Tags: useronline, usersonline, wp-useronline, online, users, user, ajax, widget
-Requires at least: 3.1
-Tested up to: 3.5
-Stable tag: 2.82
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Contributors: GamerZ, scribu  
+Tags: useronline, usersonline, wp-useronline, online, users, user, ajax, widget  
+Requires at least: 3.1  
+Tested up to: 3.5  
+Stable tag: 2.83  
+License: GPLv2 or later  
+License URI: http://www.gnu.org/licenses/gpl-2.0.html  
 
 Enable you to display how many users are online on your Wordpress blog with detailed statistics.
 
 == Description ==
 
 This plugin enables you to display how many users are online on your Wordpress site, with detailed statistics of where they are and who they are (Members/Guests/Search Bots).
-
-Links: [Translating](http://scribu.net/wordpress/translating-plugins.html)
 
 == Installation ==
 
@@ -87,7 +85,10 @@ Make sure your host is running PHP 5. The only foolproof way to do this is to ad
 == Changelog ==
 
 = 2.83 =
-* show user agent when hovering over IP, instead of address lookup
+* Show user agent when hovering over IP, instead of address lookup
+* Use local time for UserOnline Page
+* Fixed 'Strict Standards: Non-static method' warnings
+* Update scb Framework
 
 = 2.82 =
 * show most recent visitors first
