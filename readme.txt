@@ -2,8 +2,8 @@
 Contributors: GamerZ, scribu  
 Tags: useronline, usersonline, wp-useronline, online, users, user, ajax, widget  
 Requires at least: 3.1  
-Tested up to: 4.0  
-Stable tag: 2.84  
+Tested up to: 4.1  
+Stable tag: 2.85  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -53,9 +53,9 @@ If you ARE NOT using nice permalinks, you need to go to `WP-Admin -> Settings ->
 
 == Screenshots ==
 
-1. Right Now text
-2. Admin page
-3. Settings page
+1. Admin - Dashboard's Right Now
+2. UserOnline Page
+3. Admin - Settings Page
 
 == Frequently Asked Questions ==
 
@@ -90,6 +90,9 @@ Make sure your host is running PHP 5. The only foolproof way to do this is to ad
 `var_dump(PHP_VERSION);`
 
 == Changelog ==
+= 2.85 =
+* NEW: Uses WordPress native uninstall.php
+
 = 2.84 =
 * NEW: Bump to 4.0
 
