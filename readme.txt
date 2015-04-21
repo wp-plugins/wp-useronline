@@ -1,8 +1,9 @@
 === WP-UserOnline ===
 Contributors: GamerZ, scribu  
+Donate link: http://lesterchan.net/site/donation/  
 Tags: useronline, usersonline, wp-useronline, online, users, user, ajax, widget  
 Requires at least: 3.1  
-Tested up to: 4.1  
+Tested up to: 4.2  
 Stable tag: 2.85  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html  
@@ -20,6 +21,9 @@ This plugin enables you to display how many users are online on your Wordpress s
 
 = Credits =
 * Plugin icon by [Freepik](http://www.freepik.com) from [Flaticon](http://www.flaticon.com)
+
+= Donations =
+I spent most of my free time creating, updating, maintaining and supporting these plugins, if you really love my plugins and could spare me a couple of bucks, I will really appreciate it. If not feel free to use it without any obligations.
 
 == Installation ==
 You can either install it automatically from the WordPress admin, or do it manually:
